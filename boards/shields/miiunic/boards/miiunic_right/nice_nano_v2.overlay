@@ -9,21 +9,21 @@
 //
 
 // pin control for i2c0
-// - SDA on D3
-// - SCL on D4
+// - SDA on D2
+// - SCL on D3
 &pinctrl {
     /* configuration for i2c0 device, default state */
     i2c0_default: i2c0_default {
         group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 0, 20)>,
-                    <NRF_PSEL(TWIM_SCL, 0, 22)>;
+            psels = <NRF_PSEL(TWIM_SDA, 0, 17)>,
+                    <NRF_PSEL(TWIM_SCL, 0, 20)>;
         };
     };
     /* configuration for i2c0 device, sleep state */
     i2c0_sleep: i2c0_sleep {
         group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 0, 20)>,
-                    <NRF_PSEL(TWIM_SCL, 0, 22)>;
+            psels = <NRF_PSEL(TWIM_SDA, 0, 17)>,
+                    <NRF_PSEL(TWIM_SCL, 0, 20)>;
             low-power-enable;
         };
     };
@@ -49,29 +49,5 @@
         no-secondary-tap;
         no-taps;
         sensitivity = "2x";
-    };
-};
-
-&i2c0 {
-    oled: ssd1306@3c {
-        compatible = "solomon,ssd1306fb";
-        reg = <0x3c>;
-        width = <128>;
-        height = <64>;
-
-        segment-offset = <0>;
-        page-offset = <0>;
-        display-offset = <0>;
-        multiplex-ratio = <31>;
-        prechargep = <0x22>;
-        segment-remap;
-        com-invdir;
-        com-sequential;
-        inversion-on;
-    };
-};
-/ {
-    chosen {
-        zephyr,display = &oled;
     };
 };
